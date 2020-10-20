@@ -1,0 +1,18 @@
+{
+    "name": "loren/natural-framework",
+    "description": "Natural library for Natural WordPress OOP Theme",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Lorenzo Milesi",
+            "email": "lorenzo.milesi@live.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "NaturalFramework\\": "src/"
+        }
+    },
+    "require": {}
+}
