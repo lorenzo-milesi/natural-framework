@@ -2,6 +2,7 @@
     "name": "loren/natural-framework",
     "description": "Natural library for Natural WordPress OOP Theme",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Lorenzo Milesi",
