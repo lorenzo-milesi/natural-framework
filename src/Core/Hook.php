@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace NaturalFramework\Core;
 
-use _HumbugBox7b5ad934e739\Nette\Utils\Paginator;
 use NaturalFramework\Exceptions\MustImplementException;
 
 /**
@@ -38,8 +37,8 @@ final class Hook
         $this->hook = $hook;
         $this->starters = [];
         foreach ($starters as $starter) {
-            if(!in_array(StartInterface::class, class_implements($starter))) {
-                throw new MustImplementException("$starter must implement " . StartInterface::class);
+            if (!in_array(StartInterface::class, class_implements($starter))) {
+                throw new MustImplementException("$starter must implement ".StartInterface::class);
             }
             $this->starters[] = new $starter();
         }
@@ -61,6 +60,7 @@ final class Hook
      * @param  mixed  ...$params
      *
      * @return self
+     * @throws MustImplementException
      */
     public static function build(...$params): self
     {
