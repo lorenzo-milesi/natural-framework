@@ -4,11 +4,13 @@
 require __DIR__.'/../../../vendor/autoload.php';
 
 use NaturalFramework\Commands\CreateMenuLocationCommand;
+use NaturalFramework\Commands\CreateSidebarLocationCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
 
 $application->add(new CreateMenuLocationCommand());
+$application->add(new CreateSidebarLocationCommand());
 
 try {
     $application->run();
