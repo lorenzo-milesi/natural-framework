@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace NaturalFramework\Commands;
 
+use NaturalFramework\Commands\Maker\MenuMaker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,6 +28,14 @@ class CreateMenuLocationCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $className = $io->ask('Please enter a class name');
         $menuName = $io->ask('Please enter a menu name', $className);
+
+        $menuMaker = new MenuMaker('../../../src/Locations/Menus', $className);
+
+        $menuMaker->execute();
+
+        if ($menuMaker->alreadyExists()) {
+            $io->warning('This file already exists');
+        }
 
         $output->writeln([
             'Menu: '.$menuName,
