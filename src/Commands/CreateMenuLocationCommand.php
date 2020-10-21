@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CreateMenuLocationCommand extends Command
 {
@@ -23,18 +24,13 @@ class CreateMenuLocationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $helper = $this->getHelper('question');
-
-        $question = new Question('Please enter a classname');
-        $className = $helper->ask($input, $output, $question);
-
-        $question = new Question('Please enter a menu name');
-        $name = $helper->ask($input, $output, $question);
+        $io = new SymfonyStyle($input, $output);
+        $className = $io->ask('Please enter a class name');
+        $menuName = $io->ask('Please enter a menu name', $className);
 
         $output->writeln([
-            'Menu: '.$className,
+            'Menu: '.$menuName,
             'File: ./src/Locations/Menus/'.$className.'.php',
-            'Name: '.$name
         ]);
 
         return Command::SUCCESS;
