@@ -8,6 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 class CreateMenuLocationCommand extends Command
 {
@@ -17,14 +18,24 @@ class CreateMenuLocationCommand extends Command
     protected function configure()
     {
         $this->setDescription('Creates a new menu location')
-            ->setHelp('Creates a new menu location for WordPress Natural Theme')
-            ->addArgument('name', InputArgument::REQUIRED, 'Menu\'s class name');
+            ->setHelp('Creates a new menu location for WordPress Natural Theme');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Generating a new Menu...');
-        $output->writeln('Menu: '.$input->getArgument('name'));
+        $helper = $this->getHelper('question');
+
+        $question = new Question('Please enter a classname');
+        $className = $helper->ask($input, $output, $question);
+
+        $question = new Question('Please enter a menu name');
+        $name = $helper->ask($input, $output, $question);
+
+        $output->writeln([
+            'Menu: '.$className,
+            'File: ./src/Locations/Menus/'.$className.'.php',
+            'Name: '.$name
+        ]);
 
         return Command::SUCCESS;
     }
