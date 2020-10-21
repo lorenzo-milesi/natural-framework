@@ -39,7 +39,7 @@ final class Hook
         $this->starters = [];
         foreach ($starters as $starter) {
             if(!in_array(StartInterface::class, class_implements($starter))) {
-                throw new MustImplementException();
+                throw new MustImplementException("$starter must implement " . StartInterface::class);
             }
             $this->starters[] = new $starter();
         }
