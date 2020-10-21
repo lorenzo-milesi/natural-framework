@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace NaturalFramework\Core;
 
+use _HumbugBox7b5ad934e739\Nette\Utils\Paginator;
+use NaturalFramework\Exceptions\MustImplementException;
+
 /**
  * Class Hook
  * @package NaturalFramework\Core
@@ -26,13 +29,21 @@ final class Hook
      * Hook constructor.
      *
      * @param  string  $hook
-     * @param  StartInterface  ...$starters
+     * @param  string  ...$starters
+     *
+     * @throws MustImplementException
      */
-    public function __construct(string $hook, StartInterface ...$starters)
+    public function __construct(string $hook, string ...$starters)
     {
         $this->hook = $hook;
-        $this->starters = $starters;
-        /** @phpstan-ignore-next-line  */
+        $this->starters = [];
+        foreach ($starters as $starter) {
+            if(!in_array(StartInterface::class, class_implements($starter))) {
+                throw new MustImplementException();
+            }
+            $this->starters[] = new $starter();
+        }
+        /** @phpstan-ignore-next-line */
         add_action($this->hook, [$this, 'start']);
     }
 
@@ -42,7 +53,7 @@ final class Hook
     public function start(): void
     {
         foreach ($this->starters as $starter) {
-            (new $starter())->start();
+            $starter->start();
         }
     }
 
