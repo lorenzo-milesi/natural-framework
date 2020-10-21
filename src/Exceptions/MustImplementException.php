@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace NaturalFramework\Exceptions;
 
 use Exception;
+use Throwable;
 
 class MustImplementException extends Exception
 {
