@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NaturalFramework\Commands\Maker;
 
 class MenuMaker extends AbstractFileMaker
 {
     protected string $menuName;
 
-    public function setMenuName(string $menuName): self
+    public function setMenuName(string $menuName): MenuMaker
     {
         $this->menuName = $menuName;
 
@@ -33,5 +35,4 @@ class {$this->filename} implements StartInterface
 }
 HE;
     }
-
 }

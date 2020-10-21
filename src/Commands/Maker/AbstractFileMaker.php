@@ -10,7 +10,7 @@ abstract class AbstractFileMaker
     protected string $path;
     protected bool $exists = false;
 
-    public function __construct($path, $filename)
+    public function __construct(string $path, string $filename)
     {
         $this->path = $path;
         $this->filename = $filename;
@@ -46,9 +46,10 @@ abstract class AbstractFileMaker
             if (!is_dir($directory)) {
                 mkdir($directory, 0755, true);
             }
-            $open = fopen($this->getFullPath(), 'a');
-            fwrite($open, $this->fileContent());
-            fclose($open);
+            if ($open = fopen($this->getFullPath(), 'a')) {
+                fwrite($open, $this->fileContent());
+                fclose($open);
+            }
         }
     }
 

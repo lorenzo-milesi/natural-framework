@@ -1,48 +1,47 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace NaturalFramework\Commands;
 
 use NaturalFramework\Commands\Maker\MenuMaker;
+use NaturalFramework\Commands\Maker\SidebarMaker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreateMenuLocationCommand extends Command
-{
-    /** @var string */
-    protected static $defaultName = 'menu';
+class CreateSidebarLocationCommand extends Command
+{    /** @var string */
+    protected static $defaultName = 'sidebar';
 
     protected function configure(): void
     {
-        $this->setDescription('Creates a new menu location')
-            ->setHelp('Creates a new menu location for WordPress Natural Theme');
+        $this->setDescription('Creates a new sidebar location')
+            ->setHelp('Creates a new sidebar location for WordPress Natural Theme');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
         $className = $io->ask('Please enter a class name');
-        $menuName = $io->ask('Please enter a menu name', $className);
+        $name = $io->ask('Please enter a sidebar name', $className);
+        $id = $io->ask('Please enter an id', $name);
 
-        $menuMaker = new MenuMaker('src/Locations/Menus', $className);
+        $sidebarMaker = new SidebarMaker('src/Locations/Sidebars', $className);
 
-        $menuMaker->setMenuName($menuName)->execute();
+        $sidebarMaker->setName($name)->setId($id)->execute();
 
-        if ($menuMaker->alreadyExists()) {
+        if ($sidebarMaker->alreadyExists()) {
             $io->warning('This file already exists');
         }
 
         $io->writeln([
-            'Menu: '.$menuName,
+            'Sidebar: '.$name,
             'File: ./src/Locations/Menus/'.$className.'.php',
         ]);
 
         $io->info([
             'To enable the new menu location, you may add :',
-            "Hook::build('after_setup_theme', {$className}::class);",
+            "Hook::build('widgets_init', {$className}::class);",
             'inside functions.php file',
         ]);
 
