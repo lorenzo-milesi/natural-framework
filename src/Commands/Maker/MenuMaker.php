@@ -16,22 +16,22 @@ class MenuMaker extends AbstractFileMaker
     protected function fileContent(): string
     {
         return <<<HE
-        <?php
+<?php
 
-        declare(strict_types = 1);
+declare(strict_types = 1);
 
-        namespace App\Locations\Menus;
+namespace App\Locations\Menus;
 
-        use NaturalFramework\Core\StartInterface;
+use NaturalFramework\Core\StartInterface;
 
-        class {$this->filename} implements StartInterface
-        {
-            public function start(): void
-            {
-                register_nav_menu('{$this->filename}', '$this->menuName');
-            }
-        }
-        HE;
+class {$this->filename} implements StartInterface
+{
+    public function start(): void
+    {
+        register_nav_menu('{$this->filename}', '$this->menuName');
+    }
+}
+HE;
     }
 
 }
