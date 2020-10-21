@@ -29,15 +29,15 @@ class CreateMenuLocationCommand extends Command
         $className = $io->ask('Please enter a class name');
         $menuName = $io->ask('Please enter a menu name', $className);
 
-        $menuMaker = new MenuMaker('../../../src/Locations/Menus', $className);
+        $menuMaker = new MenuMaker('src/Locations/Menus', $className);
 
-        $menuMaker->execute();
+        $menuMaker->setMenuName($menuName)->execute();
 
         if ($menuMaker->alreadyExists()) {
             $io->warning('This file already exists');
         }
 
-        $output->writeln([
+        $io->writeln([
             'Menu: '.$menuName,
             'File: ./src/Locations/Menus/'.$className.'.php',
         ]);
