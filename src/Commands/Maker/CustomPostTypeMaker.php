@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace NaturalFramework\Commands\Maker;
 
+use IlluminateAgnostic\Str\Support\Str;
+
 class CustomPostTypeMaker extends AbstractFileMaker
 {
     private array $args;
@@ -18,6 +20,8 @@ class CustomPostTypeMaker extends AbstractFileMaker
 
     protected function fileContent(): string
     {
+        $supports = $this->getSupports();
+
         return <<<HE
 <?php
 
@@ -32,26 +36,26 @@ class {$this->filename} implements StartInterface
     public function start(): void
     {
         \$labels = [
-            'name' => {$this->args['labels']['name']},
-            'singular_name' => {$this->args['labels']['singular_name']},
-            'menu_name' => {$this->args['labels']['menu_name']},
-            'all_items' => {$this->args['labels']['all_items']},
-            'view_item' => {$this->args['labels']['view_item']},
-            'add_new_item' => {$this->args['labels']['add_new_item']},
-            'add_new' => {$this->args['labels']['add_new']},
-            'edit_item' => {$this->args['labels']['edit_item']},
-            'update_item' => {$this->args['labels']['update_item']},
-            'search_items' => {$this->args['labels']['search_items']},
-            'not_found' => {$this->args['labels']['not_found']},
-            'not_found_in_trash' => {$this->args['labels']['not_found_in_trash']},
+            'name' => '{$this->args['labels']['name']}',
+            'singular_name' => '{$this->args['labels']['singular_name']}',
+            'menu_name' => '{$this->args['labels']['menu_name']}',
+            'all_items' => '{$this->args['labels']['all_items']}',
+            'view_item' => '{$this->args['labels']['view_item']}',
+            'add_new_item' => '{$this->args['labels']['add_new_item']}',
+            'add_new' => '{$this->args['labels']['add_new']}',
+            'edit_item' => '{$this->args['labels']['edit_item']}',
+            'update_item' => '{$this->args['labels']['update_item']}',
+            'search_items' => '{$this->args['labels']['search_items']}',
+            'not_found' => '{$this->args['labels']['not_found']}',
+            'not_found_in_trash' => '{$this->args['labels']['not_found_in_trash']}',
         ];
         
         \$args = [
-            'label' => {$this->args['label']},
-            'description' => {$this->args['description']},
-            'menu_icon' => {$this->args['menu_icon']},
+            'label' => '{$this->args['label']}',
+            'description' => '{$this->args['description']}',
+            'menu_icon' => '{$this->args['menu_icon']}',
             'labels' => \$labels,
-            'supports' => {$this->args['supports']},
+            'supports' => {$supports},
             'hierarchical' => {$this->args['hierarchical']},
             'public' => {$this->args['public']},
             'show_ui' => {$this->args['show_ui']},
@@ -63,7 +67,7 @@ class {$this->filename} implements StartInterface
             'has_archive' => {$this->args['has_archive']},
             'exclude_from_search' => {$this->args['exclude_from_search']},
             'publicly_queryable' => {$this->args['publicly_queryable']},
-            'capability_type' => {$this->args['capability_type']},
+            'capability_type' => '{$this->args['capability_type']}',
             'show_in_rest' => {$this->args['show_in_rest']},
         ];
         
@@ -71,6 +75,17 @@ class {$this->filename} implements StartInterface
     }
 }
 HE;
+    }
+
+    private function getSupports(): string
+    {
+        $supports = '[';
+        foreach ($this->args['supports'] as $support) {
+            $supports .= " '$support',";
+        }
+        $supports .= ']';
+
+        return $supports;
     }
 
 }
