@@ -19,12 +19,10 @@
         "php": "^7.4",
         "symfony/var-dumper": "5.x-dev",
         "symfony/console": "5.x-dev",
-        "voku/portable-ascii": "^1.4"
+        "pragmarx/ia-str": "^7.3"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.0@dev",
-        "pragmarx/ia-str": "7.3.0",
-        "doctrine/inflector": "^1.2"
+        "phpstan/phpstan": "^0.12.0@dev"
     },
     "bin": [
         "nat"
