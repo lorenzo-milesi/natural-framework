@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace NaturalFramework\Commands\Maker;
+namespace NaturalFramework\Commands\Maker\Location\Location;
+
+use NaturalFramework\Commands\Maker\Location\AbstractFileMaker;
 
 class SidebarMaker extends AbstractFileMaker
 {

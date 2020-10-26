@@ -2,8 +2,8 @@
 
 namespace NaturalFramework\Commands;
 
-use NaturalFramework\Commands\Maker\MenuMaker;
-use NaturalFramework\Commands\Maker\SidebarMaker;
+use NaturalFramework\Commands\Maker\Location\Location\MenuMaker;
+use NaturalFramework\Commands\Maker\Location\Location\SidebarMaker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

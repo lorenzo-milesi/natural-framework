@@ -12,6 +12,7 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
 use NaturalFramework\Commands\CreateCustomPostTypeCommand;
 use NaturalFramework\Commands\CreateMenuLocationCommand;
 use NaturalFramework\Commands\CreateSidebarLocationCommand;
+use NaturalFramework\Commands\CreateWalkerMenuCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
@@ -19,6 +20,7 @@ $application = new Application();
 $application->add(new CreateMenuLocationCommand());
 $application->add(new CreateSidebarLocationCommand());
 $application->add(new CreateCustomPostTypeCommand());
+$application->add(new CreateWalkerMenuCommand());
 
 try {
     $application->run();
