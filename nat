@@ -10,6 +10,7 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
 }
 
 use NaturalFramework\Commands\CreateCustomPostTypeCommand;
+use NaturalFramework\Commands\CreateCustomTaxonomyCommand;
 use NaturalFramework\Commands\CreateMenuLocationCommand;
 use NaturalFramework\Commands\CreateSidebarLocationCommand;
 use NaturalFramework\Commands\CreateWalkerMenuCommand;
@@ -20,6 +21,7 @@ $application = new Application();
 $application->add(new CreateMenuLocationCommand());
 $application->add(new CreateSidebarLocationCommand());
 $application->add(new CreateCustomPostTypeCommand());
+$application->add(new CreateCustomTaxonomyCommand());
 $application->add(new CreateWalkerMenuCommand());
 
 try {
