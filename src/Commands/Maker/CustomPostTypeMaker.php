@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace NaturalFramework\Commands\Maker;
 
-use IlluminateAgnostic\Str\Support\Str;
-
 class CustomPostTypeMaker extends AbstractFileMaker
 {
     private array $args;
@@ -87,5 +85,4 @@ HE;
 
         return $supports;
     }
-
 }

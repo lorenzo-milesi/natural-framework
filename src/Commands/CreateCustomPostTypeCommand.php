@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace NaturalFramework\Commands;
 
 use IlluminateAgnostic\Str\Support\Str;
-use NaturalFramework\Commands\Maker\Location\Location\CustomPostTypeMaker;
+use NaturalFramework\Commands\Maker\CustomPostTypeMaker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
